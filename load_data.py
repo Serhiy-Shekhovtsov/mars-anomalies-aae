@@ -1,6 +1,6 @@
 """
 Downloads sepcified required number of [random] files from Amazon S3 bucket.
-Skups files that already exist.
+Skips files that already exist.
 """
 
 import os
