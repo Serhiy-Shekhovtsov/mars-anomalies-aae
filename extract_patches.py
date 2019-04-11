@@ -14,6 +14,7 @@ def get_patch_indexes(img_size, patch_size):
     
     return [int(i * patch_size) for i in indexes]
 
+
 def extract_patches(src_img, patch_size):
     img_height = src_img.shape[0]
     img_width = src_img.shape[1]
@@ -30,6 +31,7 @@ def extract_patches(src_img, patch_size):
             patches[h_i, w_i] = patch
     
     return patches
+
 
 def get_patches_ids(patches, id_prefix = ''):
     ids = []

@@ -22,6 +22,7 @@ client = boto3.client('s3', region_name='eu-north-1', config=Config(signature_ve
 resource = boto3.resource('s3', region_name='eu-north-1', config=Config(signature_version=UNSIGNED))
 bucket = resource.Bucket(PrivateConfig.BUCKET_NAME)
 
+
 # get list of all photos
 def list_files(client, ls=[]):
     """List files in specific S3 URL"""
@@ -30,6 +31,7 @@ def list_files(client, ls=[]):
         ls.append(content.get('Key'))
         
     return ls
+
 
 files = list_files(client)
 
