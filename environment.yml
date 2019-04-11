@@ -1,0 +1,15 @@
+name: mars-aae
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - jupyter=1.0.0
+  - matplotlib=3.0.3
+  - numpy=1.16.2
+  - openjpeg=2.3.1
+  - pip=19.0.3
+  - python=3.7.3
+  - scipy=1.2.1
+  - pip:
+    - Pillow==6.0.0
+    - pvl==0.3.0
