@@ -1,6 +1,7 @@
 import numpy as np
 import torch
 
+
 def numpy_images_to_tensor_dataset(images):
     """Converts list of images to PyTorch tensor"""
 

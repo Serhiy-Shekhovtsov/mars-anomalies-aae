@@ -8,7 +8,7 @@ owl_img = imread('examples/owl.jpg')
 
 patches = extract_patches(owl_img, patch_size=200)
 
-fig, img_plots = plt.subplots(*patches.shape, figsize=(8, 10), gridspec_kw = {'wspace':0.05, 'hspace':0.05})
+fig, img_plots = plt.subplots(*patches.shape, figsize=(8, 10), gridspec_kw={'wspace': 0.05, 'hspace': 0.05})
 
 fig.patch.set_facecolor('black')
 

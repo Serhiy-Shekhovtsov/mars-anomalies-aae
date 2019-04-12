@@ -26,6 +26,7 @@ def extract_img(image_file: str):
     
     return img
 
+
 def get_patch_indexes(img_size, patch_size):
     patches_n = img_size / patch_size
     remainder = img_size % patch_size
@@ -51,14 +52,14 @@ def extract_patches(src_img, patch_size):
 
     for h_i, h in enumerate(h_indexes):    
         for w_i, w in enumerate(w_indexes):
-            patch = src_img[h : h+patch_size, w : w+patch_size, :]
+            patch = src_img[h: h+patch_size, w: w+patch_size, :]
 
             patches[h_i, w_i] = patch
     
     return patches
 
 
-def get_patches_ids(patches, id_prefix = ''):
+def get_patches_ids(patches, id_prefix=''):
     ids = []
     
     for i in range(0, patches.shape[0]):    
@@ -66,6 +67,7 @@ def get_patches_ids(patches, id_prefix = ''):
             ids.append(f'{id_prefix}_{i}_{j}')
     
     return patches.flatten(), ids
+
 
 def extract_patches_from_img(img_name, patch_size=256):
     """Reads IMG file, parses it and split into patches of specified size"""
