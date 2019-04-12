@@ -66,3 +66,15 @@ def get_patches_ids(patches, id_prefix = ''):
             ids.append(f'{id_prefix}_{i}_{j}')
     
     return patches.flatten(), ids
+
+def extract_patches_from_img(img_name, patch_size=256):
+    """Reads IMG file, parses it and split into patches of specified size"""
+
+    sample_img = np.asarray(extract_img(f'data/{img_name}'))
+
+    sample_img = sample_img[..., np.newaxis]
+
+    patches = extract_patches(sample_img, patch_size=patch_size)
+    images, ids = get_patches_ids(patches, img_name)
+
+    return images, ids
