@@ -14,7 +14,7 @@ $ pip install boto3
 ### Quick Help
 
 ```bash
-python tools/download_data.py -h
+$ python tools/download_data.py -h
 
 usage: download_data.py [-h] [-b BUCKET] [-p PREF] [-d PATH] [-n N] [-r] [-v]
 
