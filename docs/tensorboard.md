@@ -61,3 +61,7 @@ Open the following link in your browser (by default):
 ```bash
 http://localhost:6006/
 ```
+
+## More
+
+[tensorboard for pytorch](https://github.com/lanpa/tensorboardX)
