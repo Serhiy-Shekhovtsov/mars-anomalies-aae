@@ -25,11 +25,11 @@ tb_logger = TBLogger(logdir)
 for n_iter in range(...):
     ...
     output = model(data)
-    loss = (output, gt)
+    loss = loss_fn(output, gt)  # compute training loss; gt - ground truth values
     
     # to log loss value:
     # 'data/loss' - tag; loss - loss value; n_iter - global step
-    tb_logger.log_loss('data/loss', loss.item().data, n_iter)
+    tb_logger.log_loss('data/loss', loss.item(), n_iter)
 
 # close logger
 tb_logger.close()
