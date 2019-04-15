@@ -81,15 +81,16 @@ def main(bucket_name: str,
 
         if os.path.isfile(file_path):
             logging.info(f'{file_name} file exists. Skipping...')
+            num_downloaded += 1
             continue
 
-        logging.info(f'[{num_downloaded+1}/{nfiles}] | Downloading {file_name} ...')
+        logging.info(f'[{num_downloaded+1}/{nfiles}] | Downloading {file_name}...')
         bucket.download_file(file_key, file_path)
 
         num_downloaded += 1
-        logging.info(f'File {file_name} downloaded successfully!')
+        logging.info(f'File {file_name} was downloaded successfully!')
 
-    logging.info('All files downloaded successfully!')
+    logging.info('All the files were downloaded successfully!')
 
 
 if __name__ == '__main__':
