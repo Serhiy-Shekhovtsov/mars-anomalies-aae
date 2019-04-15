@@ -29,7 +29,7 @@ for n_iter in range(...):
     
     # to log loss value:
     # 'data/loss' - tag; loss - loss value; n_iter - global step
-    tb_logger.log_loss('data/loss', loss.item(), n_iter)
+    tb_logger.log_loss(loss.item(), n_iter)
 
 # close logger
 tb_logger.close()
