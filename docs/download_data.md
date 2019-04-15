@@ -57,7 +57,7 @@ $ python tools/download_data.py -b <bucketname> -n 10 -r -v
 Set `-n` to `0`:
 
 ```bash
-$ python tools/download_data.py -b <bucketname> -d -n 0 -v
+$ python tools/download_data.py -b <bucketname> -n 0 -v
 
 15-Apr-19 07:28:40 - [1000] file(s) will be downloaded [not randomly] to [data]
 15-Apr-19 07:28:40 - Starting...
