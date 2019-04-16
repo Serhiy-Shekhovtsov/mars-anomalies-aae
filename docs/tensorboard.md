@@ -1,4 +1,4 @@
-# How to use TensorBoard logger
+# How to use TensorBoard Logger
 
 TensorBoard logger implemented in `logger` module as `TBLogger` class.
 
@@ -54,9 +54,10 @@ for n_iter in range(...):
     ...
     output = model(data)
     loss = loss_fn(output, gt)  # compute training loss; gt - ground truth values
-
+    ...
     # log several losses
-    tb_logger.log_losses({'training_loss': loss.item()})
+    tb_logger.log_losses({'training_loss': loss.item(),
+                          'validation_loss': val_loss.item()})
 
 # close logger
 tb_logger.close()  # Now all the scalars logged by log_losses wil be exported to the json file
@@ -103,13 +104,13 @@ If you want to log scalar values of smth, simply add new method to `TBLogger` cl
 ```python
 class TBLogger:
     ...
-    def log_acc(self, acc, global_step):
-        self.log('data/acc', acc, global_step)
+    def log_acc(self, acc):
+        self.log_scalar('data/acc', acc)
 ```
 
-Where, `acc` - accuracy, scalar value; `global_step` - number of epoch/iteration/batch; `'data/acc'` - tag.
+Where, `'data/acc'` - tag, `acc` - accuracy, scalar value.
 
-**NOTE:** `TBLogger` method `log` writes only scalar value. Currently only single scalar values are supported.  
+**NOTE:** `TBLogger` method `log_scalar` writes only scalar value. Take a look at `log_scalars` for logging multiple values.
 
 ## How to Launch
 
