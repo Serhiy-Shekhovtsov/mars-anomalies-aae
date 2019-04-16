@@ -11,6 +11,7 @@ $ pip install tensorflow tensorboard tensorboardx
 ## How to Use
 
 Here is a basic example how to log loss values during training using already implemented method called `log_loss`.
+**NOTE:** Values logged by this method cannot be exported to json for external processing.
 
 ```python
 from logger import TBLogger
@@ -23,17 +24,42 @@ tb_logger = TBLogger(logdir)
 
 # training loop starts here
 for n_iter in range(...):
+
+     # update global step
+    tb_logger.update_global_step(1)  # increase global step by 1 (1 iteration or epoch)
     ...
     output = model(data)
     loss = loss_fn(output, gt)  # compute training loss; gt - ground truth values
     
     # to log loss value:
-    # 'data/loss' - tag; loss - loss value; n_iter - global step
-    tb_logger.log_loss(loss.item(), n_iter)
+    tb_logger.log_loss(loss.item())  # loss.item() - float loss value
 
 # close logger
 tb_logger.close()
 ```
+
+With novel `log_losses` method.
+
+**NOTE:** Values logged by this method can be exported to json file for external processing.
+
+```python
+tb_logger = TBLogger(logdir)
+
+for n_iter in range(...):
+
+    # update global step
+    tb_logger.update_global_step(1)  # increase global step by 1 (1 iteration or epoch)
+    ...
+    output = model(data)
+    loss = loss_fn(output, gt)  # compute training loss; gt - ground truth values
+
+    # log several losses
+    tb_logger.log_losses({'training_loss': loss.item()})
+
+# close logger
+tb_logger.close()  # Now all the scalars logged by log_losses wil be exported to the json file
+```
+
 
 ## How to Extend
 
@@ -64,4 +90,4 @@ http://localhost:6006/
 
 ## More
 
-[tensorboard for pytorch](https://github.com/lanpa/tensorboardX)
+[Tensorboard for PyTorch](https://github.com/lanpa/tensorboardX)
