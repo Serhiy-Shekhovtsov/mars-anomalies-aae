@@ -2,6 +2,7 @@
 """
 
 import os
+import torchvision.utils as vutils
 from tensorboardX import SummaryWriter
 
 
@@ -54,6 +55,25 @@ class TBLogger(object):
             tb_logger.log_losses({'training_loss': 0.1, 'val_loss': 0.2})
         """
         self.log_scalars('losses', losses)
+
+    def log_img(self, tag: str, image_tensor) -> None:
+        """Logs image data.
+
+        Args:
+            tag (str): image tag.
+            image_tensor (torch.Tensor, numpy.array): image data.
+        """
+        self.writer.add_image(tag, image_tensor, self.global_step)
+
+    def log_img_batch(self, tag: str, image_batch, **kwargs) -> None:
+        """Logs batch of images.
+
+        Args:
+            tag (str): image tag.
+            image_batch (torch.Tensor): batch of images of shape (BCHW).
+            **kwargs: other arguments are documented in torchvision.utils.make_grid.
+        """
+        self.log_img(tag, vutils.make_grid(image_batch, **kwargs))
 
     def update_global_step(self, step: int) -> None:
         """Updates global step by step.

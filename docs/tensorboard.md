@@ -10,6 +10,8 @@ $ pip install tensorflow tensorboard tensorboardx
 
 ## How to Use
 
+### How to Log Loss
+
 Here is a basic example how to log loss values during training using already implemented method called `log_loss`.
 **NOTE:** Values logged by this method cannot be exported to json for external processing.
 
@@ -38,7 +40,7 @@ for n_iter in range(...):
 tb_logger.close()
 ```
 
-With novel `log_losses` method.
+### How to Use `log_losses`
 
 **NOTE:** Values logged by this method can be exported to json file for external processing.
 
@@ -60,6 +62,39 @@ for n_iter in range(...):
 tb_logger.close()  # Now all the scalars logged by log_losses wil be exported to the json file
 ```
 
+### How to Log Images and Batches
+
+To add image, simple use `log_img` method:
+
+```python
+tb_logger.log_img(tag='data/test_image', image_tensor=img)
+```
+
+To store image batch as a grid use `log_img_batch`:
+
+```python
+tb_logger.log_img_batch(tag='data/test_batch', image_batch=batch)
+```
+
+Here is basic example how to log first batch of images for each epoch:
+
+```python
+for epoch in range(n_epochs):
+
+    # update global step
+    tb_logger.update_global_step(1)  # increase global step by 1, in this case it's epoch
+    ...
+    for n_batch, data in enumerate(dataloader):
+        ...
+        output = model(data)
+        loss = loss_fn(output, gt)
+
+        # to store first batch of images every epoch:
+        if n_batch == 0:
+            # to log batch of images as a grid with 4 images in a row and padding of 10
+            tb_logger.log_img_batch(tag='data/test_batch', image_batch=output, nrow=4, padding=10)
+        ...
+```
 
 ## How to Extend
 
