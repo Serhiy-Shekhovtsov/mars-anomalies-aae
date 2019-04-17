@@ -34,6 +34,16 @@ class TBLogger(object):
         """
         self.writer.add_scalars(main_tag, tag_scalar_dict, self.global_step)
 
+    def add_loss(self, loss):
+        """Increments global step and logs new loss
+        
+        Args:
+            loss (float?): loss value
+        """
+
+        self.update_global_step(1)
+        self.log_loss(loss)
+
     def log_loss(self, loss) -> None:
         """Logs Loss data.
 
