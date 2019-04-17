@@ -89,6 +89,11 @@ def extract_patches_from_img(img_name, patch_size=256):
     for img_name in img_names:
         sample_img = np.asarray(extract_img(f'data/{img_name}'))
 
+        # images having 1000 height are corrupted
+        if sample_img.shape[0] == 1000:
+            print('skipping corrupted image')
+            continue
+
         sample_img = sample_img[..., np.newaxis]
 
         patches = extract_patches(sample_img, patch_size=patch_size)
