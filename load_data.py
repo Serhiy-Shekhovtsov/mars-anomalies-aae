@@ -13,7 +13,7 @@ from botocore.config import Config
 
 from private_config import PrivateConfig
 
-NUM_FILES_TO_LOAD = 5  # put None to download all
+NUM_FILES_TO_LOAD = 50  # put None to download all
 BUCKET_PREFIX = 'DATA/'
 DATA_FOLDER = 'data/'
 RANDOM = True
@@ -25,10 +25,21 @@ bucket = resource.Bucket(PrivateConfig.BUCKET_NAME)
 
 # get list of all photos
 def list_files(client, ls=[]):
-    """List files in specific S3 URL"""
+    """List files in specific S3 URL
+    
+    Args:
+        client (boto 3 client):
+        ls (list, optional): Defaults to []. list to add files to
+    
+    Returns:
+        list: list of files
+    """
+
     response = client.list_objects(Bucket=PrivateConfig.BUCKET_NAME, Prefix=BUCKET_PREFIX)
     for content in response.get('Contents', []):
-        ls.append(content.get('Key'))
+        file_key = content.get('Key')
+        if 'RED' in file_key:
+            ls.append(file_key)
         
     return ls
 
