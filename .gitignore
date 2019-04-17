@@ -21,3 +21,4 @@ venv.bak/
 # pycharm
 .idea/
 logs/
+.vscode/
