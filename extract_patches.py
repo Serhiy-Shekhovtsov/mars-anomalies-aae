@@ -2,6 +2,7 @@ import numpy as np
 from PIL import Image, ContainerIO
 import pvl
 import matplotlib.pyplot as plt
+from collections.abc import Iterable
 
 
 def extract_img(image_file: str):
@@ -70,13 +71,30 @@ def get_patches_ids(patches, id_prefix=''):
 
 
 def extract_patches_from_img(img_name, patch_size=256):
-    """Reads IMG file, parses it and split into patches of specified size"""
+    """Reads IMG file, parses it and split into patches of specified size
+    
+    Args:
+        img_name (str or list of strings): list of images to extract patches from
+        patch_size (int, optional): Defaults to 256. [description]
+    
+    Returns:
+        list: patches from all files
+        list: unique ids for all patches
+    """
 
-    sample_img = np.asarray(extract_img(f'data/{img_name}'))
+    img_names = img_name if type(img_name) == list else [img_name]
+    all_images = []
+    all_ids = []
 
-    sample_img = sample_img[..., np.newaxis]
+    for img_name in img_names:
+        sample_img = np.asarray(extract_img(f'data/{img_name}'))
 
-    patches = extract_patches(sample_img, patch_size=patch_size)
-    images, ids = get_patches_ids(patches, img_name)
+        sample_img = sample_img[..., np.newaxis]
 
-    return images, ids
+        patches = extract_patches(sample_img, patch_size=patch_size)
+        images, ids = get_patches_ids(patches, img_name)
+
+        all_images += images.tolist()
+        all_ids += ids
+
+    return all_images, all_ids
