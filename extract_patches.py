@@ -91,7 +91,7 @@ def extract_patches_from_img(img_name, patch_size=256):
 
         # images having 1000 height are corrupted
         if sample_img.shape[0] == 1000:
-            print('skipping corrupted image')
+            # skipping corrupted image
             continue
 
         sample_img = sample_img[..., np.newaxis]
