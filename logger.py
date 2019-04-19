@@ -85,6 +85,16 @@ class TBLogger(object):
         """
         self.log_img(tag, vutils.make_grid(image_batch, **kwargs))
 
+    def log_histogram(self, tag: str, values, **kwargs) -> None:
+        """Logs histogram.
+
+        Args:
+            tag (str): histogram tag.
+            values (torch.Tensor, numpy.array): values for histogram.
+            **kwargs: other arguments are documented in tensorboardx add_histogram
+        """
+        self.writer.add_histogram(tag, values, self.global_step, **kwargs)
+
     def update_global_step(self, step: int) -> None:
         """Updates global step by step.
 
