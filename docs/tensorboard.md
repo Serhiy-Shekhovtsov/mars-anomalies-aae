@@ -65,7 +65,7 @@ tb_logger.close()  # Now all the scalars logged by log_losses wil be exported to
 
 ### How to Log Images and Batches
 
-To add image, simple use `log_img` method:
+To add image, simply use `log_img` method:
 
 ```python
 tb_logger.log_img(tag='data/test_image', image_tensor=img)
@@ -96,6 +96,25 @@ for epoch in range(n_epochs):
             tb_logger.log_img_batch(tag='data/test_batch', image_batch=output, nrow=4, padding=10)
         ...
 ```
+
+### How to Log Histogram
+
+Simply use `log_histogram` method:
+
+```python
+tb_logger.log_histogram('hists/histogram', tensor.clone().detach().cpu().data)
+```
+
+Here is basic example how to log model parameters (weights and biases):
+
+```python
+for name, param in model.named_parameters():
+    tb_logger.log_histogram('model/' + name, param.clone().detach().cpu().data)
+```
+
+#### Histograms and AAE
+
+[Example](https://github.com/bfarzin/pytorch_aae/blob/master/main_aae.py#L164)
 
 ## How to Extend
 
