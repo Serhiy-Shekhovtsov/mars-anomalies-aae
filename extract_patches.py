@@ -81,8 +81,7 @@ def extract_patches_from_img(img_name, patch_size=256):
         list: patches from all files
         list: unique ids for all patches
     """
-
-    img_names = img_name if type(img_name) == list else [img_name]
+    img_names = img_name if type(img_name) in [list, np.ndarray] else [img_name]
     all_images = []
     all_ids = []
 
