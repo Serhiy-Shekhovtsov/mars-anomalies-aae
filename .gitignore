@@ -23,3 +23,4 @@ venv.bak/
 logs/
 .vscode/
 imgs_test/
+logs_old/
